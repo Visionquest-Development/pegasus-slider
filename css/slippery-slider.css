@@ -1,0 +1,170 @@
+	/*======================
+		BASIC SLIPPRY SLIDER CSS
+	======================*/
+	.slider-nav .left,
+	.slider-nav .right {
+	  position: absolute;
+	  z-index: 999;
+	  display: block;
+	  top: 42.5%;
+	  text-decoration: none !important;
+	  box-shadow: none !important;
+	  color: #000;
+	  font-size: 1.5rem;
+	  cursor: pointer;
+	}
+	.slider-nav .left {
+	  left: 0;
+	}
+	.slider-nav .right {
+	  right: 0;
+	}
+	
+	.thumbs { margin: 0; padding: 0; list-style-type: none; }
+
+	/*======================
+		NEWS SLIDER
+	======================*/
+	.news-slider .text-content {
+		position: absolute;
+		left: 0;
+		background-color: rgba(255, 255, 255, 0.9);
+		padding: 1em;
+		width: 40%;
+		font-size: 0.75em;
+		height: 100%
+	}
+
+	.news-slider .text-content h2 {
+		margin: 0
+	}
+
+	.news-slider .text-content p {
+		display: none
+	}
+
+	.news-slider .text-content a.button-link {
+		padding: 0.25em 0.5em;
+		position: absolute;
+		bottom: 1em;
+		right: 1em
+	}
+
+	.news-slider .text-content .read-more {
+		float: right;
+		position: absolute;
+		bottom: 1em;
+		right: 1em
+	}
+
+	@media only screen and (min-width: 481px) {
+		.news-slider .text-content {
+			font-size: 1em
+		}
+	}
+
+	@media only screen and (min-width: 769px) {
+		.news-slider .text-content {
+			width: 35%
+		}
+		.news-slider .text-content p {
+			display: block
+		}
+	}
+
+	@media only screen and (min-width: 960px) {
+		.news-slider .text-content {
+			width: 30%
+		}
+	}
+
+	.news-slider .image-content {
+		line-height: 0
+	}
+
+	.news-slider .image-content img {
+		max-width: 100%
+	}
+
+	.news-slider .news-pager {
+		text-align: right;
+		display: block;
+		margin: 0.2em 0 0;
+		padding: 0;
+		list-style: none
+	}
+
+	.news-slider .news-pager li {
+		display: inline-block;
+		padding: 0.6em;
+		margin: 0 0 0 1em
+	}
+
+	.news-slider .news-pager li.sy-active a {
+		color: #31ACE2
+	}
+
+	.news-slider .news-pager li a {
+		font-weight: 500;
+		text-decoration: none;
+		display: block;
+		color: #222
+	}
+
+
+	/*======================
+		THUMBNAIL SLIDER
+	======================*/
+
+	.thumb-box {
+		padding: 1.4em 0 1em;
+		margin-left: -1%;
+		width: 102%
+	}
+
+	.thumb-box .thumbs {
+		overflow: hidden;
+		zoom: 1
+	}
+
+	.thumb-box .thumbs li {
+		float: left;
+		width: 25%;
+		text-align: center;
+		padding: 0 1%
+	}
+
+	.thumb-box .thumbs li img {
+		width: 100%;
+		opacity: .8;
+		-moz-transition: opacity 0.32s;
+		-o-transition: opacity 0.32s;
+		-webkit-transition: opacity 0.32s;
+		transition: opacity 0.32s;
+		border-bottom: 4px solid transparent
+	}
+
+	.thumb-box .thumbs li img.active {
+		border-color: #31ACE2;
+		opacity: 1
+	}
+
+	.thumb-box .thumbs li:hover img {
+		opacity: 1;
+		-moz-transition: opacity 0.2s;
+		-o-transition: opacity 0.2s;
+		-webkit-transition: opacity 0.2s;
+		transition: opacity 0.2s
+	}
+
+	.newsletter {
+		border: 2px solid #e24b70;
+		padding: 10px 15px
+	}
+
+	.newsletter h3 {
+		margin: 0
+	}
+
+
+	
