@@ -20,8 +20,8 @@ Domain Path: /languages
 	}
 
 	function pegasus_slider_menu_item() {
-		add_menu_page("Slider", "Slider", "manage_options", "pegasus_slider_plugin_options", "pegasus_slider_plugin_settings_page", null, 99);
-		add_submenu_page("pegasus_slider_plugin_options", "Shortcode Usage", "Usage", "manage_options", "pegasus_slider_plugin_shortcode_options", "pegasus_slider_plugin_shortcode_settings_page" );
+		//add_menu_page("Slider", "Slider", "manage_options", "pegasus_slider_plugin_options", "pegasus_slider_plugin_settings_page", null, 99);
+		//add_submenu_page("pegasus_slider_plugin_options", "Shortcode Usage", "Usage", "manage_options", "pegasus_slider_plugin_shortcode_options", "pegasus_slider_plugin_shortcode_settings_page" );
 	}
 	add_action("admin_menu", "pegasus_slider_menu_item");
 
@@ -185,8 +185,16 @@ Domain Path: /languages
 		), $atts));
 
 		// de-funkify query
-		$the_query = preg_replace('~&#x0*([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $the_query);
-		$the_query = preg_replace('~&#0*([0-9]+);~e', 'chr(\\1)', $the_query);
+		//$the_query = preg_replace('~&#x0*([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $the_query);
+		//$the_query = preg_replace('~&#0*([0-9]+);~e', 'chr(\\1)', $the_query);
+
+		$the_query = preg_replace_callback('~&#x0*([0-9a-f]+);~', function($matches){
+			return chr( dechex( $matches[1] ) );
+		}, $the_query);
+
+		$the_query = preg_replace_callback('~&#0*([0-9]+);~', function($matches){
+			return chr( $matches[1] );
+		}, $the_query);
 
 		// query is made               
 		query_posts($the_query);
@@ -200,6 +208,8 @@ Domain Path: /languages
 		$temp_content = '';
 		$the_id = '';
 
+		global $post;
+
 		// the loop
 		if (have_posts()) : while (have_posts()) : the_post();
 
@@ -207,6 +217,9 @@ Domain Path: /languages
 			$temp_link = get_permalink($post->ID);
 			$temp_date = get_the_date($post->ID);
 			$temp_pic = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
+			if ( !$temp_pic ) {
+				$temp_pic = get_template_directory_uri() . '/images/not-available.jpg';
+			}
 			$temp_excerpt = wp_trim_words( get_the_excerpt(), 150 );
 			$temp_content = wp_trim_words( get_the_content(), 300 );
 			$the_id = get_the_ID();
