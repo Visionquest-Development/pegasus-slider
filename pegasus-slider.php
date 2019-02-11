@@ -58,9 +58,9 @@ Domain Path: /languages
 	
 	
 	function pegasus_slider_plugin_styles() {
-		
-		wp_enqueue_style( 'slippery-css', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'css/slippery.css', array(), null, 'all' );
-		wp_enqueue_style( 'slippery-slider-css', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'css/slippery-slider.css', array(), null, 'all' );
+
+		wp_register_style( 'slippery-css', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'css/slippery.css', array(), null, 'all' );
+		wp_register_style( 'slippery-slider-css', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'css/slippery-slider.css', array(), null, 'all' );
 		
 	}
 	add_action( 'wp_enqueue_scripts', 'pegasus_slider_plugin_styles' );
@@ -69,9 +69,9 @@ Domain Path: /languages
 	* Proper way to enqueue JS 
 	*/
 	function pegasus_slider_plugin_js() {
-		
-		wp_enqueue_script( 'slippery-js', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/slippery.js', array( 'jquery' ), null, true );
-		wp_enqueue_script( 'pegasus-slider-plugin-js', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/plugin.js', array( 'jquery' ), null, true );
+
+		wp_register_script( 'slippery-js', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/slippery.js', array( 'jquery' ), null, 'all' );
+		wp_register_script( 'pegasus-slider-plugin-js', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/plugin.js', array( 'jquery' ), null, 'all' );
 		
 	} //end function
 	add_action( 'wp_enqueue_scripts', 'pegasus_slider_plugin_js' );
@@ -88,84 +88,95 @@ Domain Path: /languages
 	* Slider Short Code
 	*/
 	if ( ! class_exists( 'SliderClass' ) ) {
-	class SliderClass {
+		class SliderClass {
 
-		protected $_slider_divs;
+			protected $_slider_divs;
 
-		public function __construct($slider_divs = '') {
-			$this->_slider_divs = $slider_divs;
-			add_shortcode( 'slider', array( $this, 'slider_wrap') );
-			add_shortcode( 'slide', array( $this,'slider_block') );
+			public function __construct($slider_divs = '') {
+				$this->_slider_divs = $slider_divs;
+				add_shortcode( 'slider', array( $this, 'slider_wrap') );
+				add_shortcode( 'slide', array( $this,'slider_block') );
+			}
+
+			function slider_wrap ( $args, $content = null ) {
+				$wrapOutput = '';
+				$wrapOutput .= '<ul class="slippry-slider-container ">';
+				$wrapOutput .=  do_shortcode($content);
+				$wrapOutput .= '</ul>';
+
+				wp_enqueue_style( 'slippery-css' );
+				wp_enqueue_style( 'slippery-slider-css' );
+				wp_enqueue_script( 'slippery-js' );
+				wp_enqueue_script( 'pegasus-slider-plugin-js' );
+
+			   return $wrapOutput;
+			}
+
+			function slider_block( $args, $content = null ) {
+				extract(shortcode_atts(array(
+					'id' => '',
+					'title' => '',
+					'class' => '',
+				), $args));
+
+
+				$slideOutput = '<li class="'.$class.'"><a href="#'.$id.'" alt="'.$title.'">'.$content.'</a></li>';
+
+				return $slideOutput;
+			}
+
 		}
-
-		function slider_wrap ( $args, $content = null ) {
-			$wrapOutput = '';
-			$wrapOutput .= '<ul class="slippry-slider-container ">';
-			$wrapOutput .=  do_shortcode($content);
-			$wrapOutput .= '</ul>';
-		   return $wrapOutput;
-		}
-
-		function slider_block( $args, $content = null ) {
-			extract(shortcode_atts(array(  
-				'id' => '',
-				'title' => '', 
-				'class' => '', 
-			), $args));
-			
-			
-			$slideOutput = '<li class="'.$class.'"><a href="#'.$id.'" alt="'.$title.'">'.$content.'</a></li>';
-			
-			return $slideOutput;
-		}
-
-	}
-	new SliderClass;
+		new SliderClass;
 	}
 	
 	/*~~~~~~~~~~~~~~~~~~~~
 		THUMB SLIDER / carousel
 	~~~~~~~~~~~~~~~~~~~~~*/
 	if ( ! class_exists( 'ThumbSliderClass' ) ) {
-	class ThumbSliderClass {
+		class ThumbSliderClass {
 
-		protected $_slider_divs;
+			protected $_slider_divs;
 
-		public function __construct($slider_divs = '') {
-			$this->_slider_divs = $slider_divs;
-			add_shortcode( 'thumb_slider', array( $this, 'slider_wrap') );
-			add_shortcode( 'thumb_slide', array( $this,'slider_block') );
+			public function __construct($slider_divs = '') {
+				$this->_slider_divs = $slider_divs;
+				add_shortcode( 'thumb_slider', array( $this, 'slider_wrap') );
+				add_shortcode( 'thumb_slide', array( $this,'slider_block') );
+			}
+
+			function slider_wrap ( $args, $content = null ) {
+				$output = '';
+				$output .= '<ul id="thumbnails">';
+				$output .=  do_shortcode($content);
+				$output .= '</ul>';
+				$output .= '<div class="thumb-box"> <ul class="thumbs">';
+				$output .= $this->_slider_divs;
+				$output .= '</ul></div>';
+
+				wp_enqueue_style( 'slippery-css' );
+				wp_enqueue_style( 'slippery-slider-css' );
+				wp_enqueue_script( 'slippery-js' );
+				wp_enqueue_script( 'pegasus-slider-plugin-js' );
+
+				return $output;
+			}
+
+			function slider_block( $args, $content = null ) {
+				extract(shortcode_atts(array(
+					'id' => '',
+					'title' => '',
+					'class' => '',
+					'number' => '',
+				), $args));
+
+				$output = '<li><a href="#'.$title.'" alt="This is caption 2">'.$content.'</a></li>';
+
+				$this->_slider_divs.= '<li><a href="#'.$number.'" data-slide="'.$number.'">'.$content.'</a></li>';
+
+				return $output;
+			}
+
 		}
-
-		function slider_wrap ( $args, $content = null ) {
-			$output = '';
-			$output .= '<ul id="thumbnails">';
-			$output .=  do_shortcode($content);
-			$output .= '</ul>';
-			$output .= '<div class="thumb-box"> <ul class="thumbs">';
-			$output .= $this->_slider_divs;
-			$output .= '</ul></div>';
-			
-		   return $output;
-		}
-
-		function slider_block( $args, $content = null ) {
-			extract(shortcode_atts(array(  
-				'id' => '',
-				'title' => '', 
-				'class' => '', 
-				'number' => '', 
-			), $args));
-
-			$output = '<li><a href="#'.$title.'" alt="This is caption 2">'.$content.'</a></li>';
-
-			$this->_slider_divs.= '<li><a href="#'.$number.'" data-slide="'.$number.'">'.$content.'</a></li>';
-
-			return $output;
-		}
-
-	}
-	new ThumbSliderClass;
+		new ThumbSliderClass;
 	}
 	
 	
@@ -262,6 +273,12 @@ Domain Path: /languages
 		endif;
 
 		wp_reset_query();
+
+		wp_enqueue_style( 'slippery-css' );
+		wp_enqueue_style( 'slippery-slider-css' );
+		wp_enqueue_script( 'slippery-js' );
+		wp_enqueue_script( 'pegasus-slider-plugin-js' );
+
 		return '<section id="news-demo">' . $output . '</section>';
 	   
 	}
