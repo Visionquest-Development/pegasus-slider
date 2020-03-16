@@ -113,14 +113,13 @@ Domain Path: /languages
 			}
 
 			function slider_block( $args, $content = null ) {
-				extract(shortcode_atts(array(
+				extract( shortcode_atts( array(
 					'id' => '',
 					'title' => '',
 					'class' => '',
-				), $args));
+				), $args ) );
 
-
-				$slideOutput = '<li class="'.$class.'"><a href="#'.$id.'" alt="'.$title.'">'.$content.'</a></li>';
+				$slideOutput = '<li class="'. $class .'"><a href="#slide'. $id .'" alt="'. $title .'">'.$content.'</a></li>';
 
 				return $slideOutput;
 			}
@@ -201,11 +200,11 @@ Domain Path: /languages
 
 		$the_query = preg_replace_callback('~&#x0*([0-9a-f]+);~', function($matches){
 			return chr( dechex( $matches[1] ) );
-		}, $the_query);
+		}, $the_query );
 
 		$the_query = preg_replace_callback('~&#0*([0-9]+);~', function($matches){
 			return chr( $matches[1] );
-		}, $the_query);
+		}, $the_query );
 
 		// query is made               
 		query_posts($the_query);
@@ -282,5 +281,4 @@ Domain Path: /languages
 		return '<section id="news-demo">' . $output . '</section>';
 	   
 	}
-	add_shortcode("news_slider", "news_slider_query_shortcode");
-	
+	add_shortcode( "news_slider", "news_slider_query_shortcode" );
