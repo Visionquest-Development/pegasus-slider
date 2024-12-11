@@ -19,7 +19,7 @@
 	.slider-nav .right {
 	  right: 0;
 	}
-	
+
 	.thumbs { margin: 0; padding: 0; list-style-type: none; }
 
 	/*======================
@@ -124,12 +124,13 @@
 
 	.thumb-box .thumbs {
 		overflow: hidden;
-		zoom: 1
+		zoom: 1;
+    display: flex;
 	}
 
 	.thumb-box .thumbs li {
-		float: left;
-		width: 25%;
+		/* float: left;
+		width: 25%; */
 		text-align: center;
 		padding: 0 1%
 	}
@@ -137,9 +138,6 @@
 	.thumb-box .thumbs li img {
 		width: 100%;
 		opacity: .8;
-		-moz-transition: opacity 0.32s;
-		-o-transition: opacity 0.32s;
-		-webkit-transition: opacity 0.32s;
 		transition: opacity 0.32s;
 		border-bottom: 4px solid transparent
 	}
@@ -151,9 +149,6 @@
 
 	.thumb-box .thumbs li:hover img {
 		opacity: 1;
-		-moz-transition: opacity 0.2s;
-		-o-transition: opacity 0.2s;
-		-webkit-transition: opacity 0.2s;
 		transition: opacity 0.2s
 	}
 
@@ -167,4 +162,3 @@
 	}
 
 
-	
