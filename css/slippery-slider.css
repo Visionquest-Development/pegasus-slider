@@ -118,21 +118,24 @@
 
 	.thumb-box {
 		padding: 1.4em 0 1em;
-		margin-left: -1%;
-		width: 102%
+		/* margin-left: -1%;
+		width: 102% */
 	}
 
 	.thumb-box .thumbs {
 		overflow: hidden;
 		zoom: 1;
     display: flex;
+    gap: 10px;
 	}
 
 	.thumb-box .thumbs li {
 		/* float: left;
 		width: 25%; */
 		text-align: center;
-		padding: 0 1%
+		/* padding: 0 1% */
+    /* margin: 0 1%; */
+    flex: 0 0 25%;
 	}
 
 	.thumb-box .thumbs li img {
