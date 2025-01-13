@@ -4,32 +4,25 @@
       "section_name": "Slider Settings",
       "slider": [
         {
-          "name": "The Query",
-          "attribute": "the_query",
-          "options": "Your WP Query",
-          "description": "The query for posts.'",
-          "example": "the_query=\"post_type=logo_slider&showposts=100&order_by=title&order=ASC\""
+          "name": "ID",
+          "attribute": "id",
+          "options": "Any ID number",
+          "description": "Add an ID to the section",
+          "example": "id=\"test\""
         },
         {
-          "name": "Display Caption",
-          "attribute": "display_caption",
-          "options": "true, false",
-          "description": "Display the caption?",
-          "example": "display_caption=\"true\""
+          "name": "Title",
+          "attribute": "title",
+          "options": "Any title",
+          "description": "Give the Title or Caption for the image",
+          "example": "title=\"Caption goes here. Can/'t put HTML, but can escape characters with /. \""
         },
         {
-          "name": "Display Image Link",
-          "attribute": "display_img_link",
-          "options": "true, false",
-          "description": "Show the image as a link?",
-          "example": "display_img_link=\"true\""
-        },
-        {
-          "name": "Color",
-          "attribute": "is_external",
-          "options": "true, false",
-          "description": "Make the link external",
-          "example": "is_external=\"true\""
+          "name": "Class",
+          "attribute": "class",
+          "options": "Any class name",
+          "description": "Add a class to the One-Page section",
+          "example": "class=\"test\""
         }
       ],
       "news_slider": [
@@ -37,52 +30,24 @@
           "name": "The Query",
           "attribute": "the_query",
           "options": "Your WP Query",
-          "description": "The query for posts.'",
+          "description": "The query for posts.",
           "example": "the_query=\"post_type=logo_slider&showposts=100&order_by=title&order=ASC\""
-        },
-        {
-          "name": "Display Caption",
-          "attribute": "display_caption",
-          "options": "true, false",
-          "description": "Display the caption?",
-          "example": "display_caption=\"true\""
-        },
-        {
-          "name": "Display Image Link",
-          "attribute": "display_img_link",
-          "options": "true, false",
-          "description": "Show the image as a link?",
-          "example": "display_img_link=\"true\""
-        },
-        {
-          "name": "Color",
-          "attribute": "is_external",
-          "options": "true, false",
-          "description": "Make the link external",
-          "example": "is_external=\"true\""
         }
       ],
       "thumbnail_slider": [
         {
-          "name": "The Query",
-          "attribute": "the_query",
-          "options": "Your WP Query",
-          "description": "The query for posts.'",
-          "example": "the_query=\"post_type=testimonial_slider&showposts=100&order_by=title&order=ASC\""
+          "name": "ID",
+          "attribute": "id",
+          "options": "Any ID number",
+          "description": "Add an ID to the section",
+          "example": "id=\"test\""
         },
         {
-          "name": "Image",
-          "attribute": "image",
-          "options": "true, false",
-          "description": "Display the image? Defaults to true.",
-          "example": "image=\"true\""
-        },
-        {
-          "name": "Type",
-          "attribute": "type",
-          "options": "circle, none",
-          "description": "The type of image to display.",
-          "example": "type=\"circle\""
+          "name": "Title",
+          "attribute": "title",
+          "options": "Any title",
+          "description": "Give the Title or Caption for the image",
+          "example": "title=\"Caption goes here. Can/'t put HTML, but can escape characters with /. \""
         },
         {
           "name": "Class",
@@ -90,6 +55,13 @@
           "options": "any",
           "description": "The class to apply to the image container.",
           "example": "class=\"testing\""
+        },
+        {
+          "name": "Number",
+          "attribute": "number",
+          "options": "1,2,3,4...",
+          "description": "The required field for the slide number",
+          "example": "number=\"1\""
         }
       ]
     }

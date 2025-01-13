@@ -424,6 +424,8 @@ Domain Path: /languages
 			return chr( $matches[1] );
 		}, $the_query );
 
+		$the_query = str_replace('&amp;', '&', $the_query);
+
 		$query_args = array(
 			'post_type' => 'post', // Ensure you are querying the correct post type
 			'posts_per_page' => -1, // Set the number of posts to retrieve
